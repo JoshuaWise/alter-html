@@ -1,23 +1,21 @@
 {
-  "name": "clean-docs-html",
+  "name": "alter-html",
   "version": "0.1.0",
-  "description": "A command line utility to clean the HTML of a Google Doc",
-  "bin": "bin/clean-docs-html",
+  "description": "A library for performing simple transforms on html input.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "html",
-    "clean",
-    "parse",
-    "google",
-    "docs"
+    "promise",
+    "transform"
   ],
   "author": "Joshua Wise <josh@joshuawise.ninja> (http://joshuawise.ninja)",
   "license": "MIT",
   "dependencies": {
     "bluebird": "^2.9.34",
-    "htmlparser2": "^3.8.3"
+    "htmlparser2": "^3.8.3",
+    "yargs": "^3.23.0"
   }
 }

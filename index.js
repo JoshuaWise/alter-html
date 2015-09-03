@@ -2,12 +2,12 @@
 
 var Promise = require('bluebird');
 var htmlparser = require("htmlparser2");
-var Dom = require('lib/dom');
-var Tag = require('lib/tag');
-var Attribute = require('lib/attribute');
-var Text = require('lib/text');
+var Dom = require('./lib/dom');
+var Tag = require('./lib/tag');
+var Attribute = require('./lib/attribute');
+var Text = require('./lib/text');
 
-function cleanDocsHtml(string) {
+function alterHtml(string) {
 	return new Promise(function (resolve, reject) {
 		if (typeof string !== 'string') throw new Error('Argument must be a string.');
 		
@@ -44,4 +44,7 @@ function cleanDocsHtml(string) {
 	});
 }
 
-module.exports = cleanDocsHtml;
+module.exports = alterHtml;
+module.exports.Tag = Tag;
+module.exports.Attribute = Attribute;
+module.exports.Text = Text;
