@@ -18,7 +18,7 @@ function alterHtml(string) {
 			onopentag: function (name, attribs) {
 				var tag = new Tag(name);
 				for (var key in attribs) {
-					tag.attributes.push(new Attribute(key, attribs[key]));
+					tag.addAttribute(new Attribute(key, attribs[key]));
 				}
 				context.appendChild(tag);
 				context = tag;
