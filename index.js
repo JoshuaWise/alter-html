@@ -44,26 +44,25 @@ module.exports = function renderHtml(input) {
 	});
 };
 
-[
-	{
+var api = [{
 		property: 'element',
 		constructor: Element,
 		current: null,
 		original: Element.prototype.toString
-	},
-	{
+	},{
 		property: 'attribute',
 		constructor: Attribute,
 		current: null,
 		original: Attribute.prototype.toString
-	},
-	{
+	},{
 		property: 'text',
 		constructor: Text,
 		current: null,
 		original: Text.prototype.toString
 	}
-].forEach(function (node) {
+];
+
+api.forEach(function (node) {
 	Object.defineProperty(module.exports, node.property, {
 		get: function () {return node.current;},
 		set: function (func) {
@@ -74,7 +73,14 @@ module.exports = function renderHtml(input) {
 			};
 		}
 	});
-	module.exports[node.property] = function (original) {
-		return original.call(this);
-	};
 });
+
+module.exports.reset = [].forEach.bind(api, 
+	function (node) {
+		module.exports[node.property] = function (original) {
+			return original.call(this);
+		};
+	}
+);
+
+module.exports.reset();
