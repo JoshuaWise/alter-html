@@ -67,7 +67,7 @@ render('<div></div><img><footer></footer> <b></b>')
 
 The first argument of these functions is the original `toString` method, which you can use to render the node in its default way. There are examples of this in the [usage](#usage) section. 
 
-**NOTE:** if a string is not returned (i.e., if you return `undefined`), the original `toString` method is used anyway. So you can mostly ignore this argument, unless you plan on augmenting the default rendering (with regular expressions, for example).
+**NOTE:** if a string is not returned (i.e., if you return `undefined`), the original `toString` method is used anyway. So you don't actually need to use this argument to render a node in its default way. It is typically used if you plan on augmenting the default rendering (with regular expressions, for example).
 
 ## Element
 
