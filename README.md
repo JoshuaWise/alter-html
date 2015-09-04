@@ -1,5 +1,5 @@
 # render-html
-A library for customizing the rendering of HTML.
+This library easily and intuitively allows developers to perform transforms on HTML element input, by specifying custom logic.
 
 ## Usage
 ```javascript
