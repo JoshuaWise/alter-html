@@ -1,6 +1,11 @@
 # render-html
 This library easily and intuitively allows developers to perform transforms on HTML string input, by specifying custom logic.
 
+## Installation
+```
+$ npm install --save render-html
+```
+
 ## Usage
 ```javascript
 var render = require('render-html');
