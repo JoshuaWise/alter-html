@@ -10,9 +10,9 @@ $ npm install --save render-html
 ```javascript
 var render = require('render-html');
 
-render.element = function (original) {
+render.element = function (toString) {
 	if (this.name === 'span') return this.innerHTML;
-	else return original.call(this);
+	else return toString.call(this);
 };
 
 render('<div class="foo"><span>hello world</span></div>')
@@ -22,9 +22,9 @@ render('<div class="foo"><span>hello world</span></div>')
 ```
 
 ```javascript
-render.text = function (original) {
+render.text = function (toString) {
 	if (this.parent.name === 'span') return 'unicorn';
-	else return original.call(this);
+	else return toString.call(this);
 };
 
 render('<div class="foo"><span>hello world</span></div>')
@@ -34,9 +34,9 @@ render('<div class="foo"><span>hello world</span></div>')
 ```
 
 ```javascript
-render.attribute = function (original) {
+render.attribute = function (toString) {
 	if (this.name === this.value) return 'cat="power"';
-	else return original.call(this);
+	else return toString.call(this);
 };
 
 render('<div class="foo" id="id" bar="baz"></div>')
