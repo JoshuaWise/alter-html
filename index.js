@@ -28,7 +28,7 @@ module.exports = function renderHtml(input) {
 			},
 			onclosetag: function (name) {
 				if (!context.parent) throw new Error('Cannot exit a context which has no parent.');
-				if (('' + name).toLowerCase() !== context.name) throw new Error('Reached a close tag that doesn\'t match the current context.');
+				if ('' + name !== context.name) throw new Error('Reached a close tag that doesn\'t match the current context.');
 				context = context.parent;
 			},
 			onerror: function (err) {
@@ -42,7 +42,7 @@ module.exports = function renderHtml(input) {
 		parser.write(input);
 		parser.end();
 	});
-}
+};
 
 [
 	{
