@@ -93,6 +93,10 @@ _**this.closeTag**_ - alias for `this.endTag`
 
 _**this.isVoid()**_ - a method which returns `true` or `false`, whether the element is a void element (such as `<img>` and `<br>`)
 
+_**this.getAttribute(name)**_ - a method which returns the string value of the specified attribute (`null`, if the attribute does not exist on the element)
+
+_**this.hasAttribute(name)**_ - a method which returns `true` or `false`, whether the element has the specified attribute
+
 ## Attribute
 
 _**this.name**_ - the name of the attribute, lowercased ("class", "src", etc.)
