@@ -78,9 +78,7 @@ api.forEach(function (node) {
 
 module.exports.reset = [].forEach.bind(api, 
 	function (node) {
-		module.exports[node.property] = function (original) {
-			return original.call(this);
-		};
+		module.exports[node.property] = function () {};
 	}
 );
 
