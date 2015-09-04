@@ -69,6 +69,8 @@ The first argument of these functions is the original `toString` method, which y
 
 **NOTE:** if a string is not returned (i.e., if you return `undefined`), the original `toString` method is used anyway. So you don't actually need to use this argument to render a node in its default way. It is typically used if you plan on augmenting the default rendering (with regular expressions, for example).
 
+`render.reset()` is also available to reset all three rendering functions back to their default state.
+
 ## Element
 
 _**this.name**_ - the name of the element's tag, lowercased ("div", "span", etc.)
