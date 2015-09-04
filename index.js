@@ -3,32 +3,32 @@
 var Promise = require('bluebird');
 var htmlparser = require("htmlparser2");
 var Dom = require('./lib/dom');
-var Tag = require('./lib/tag');
+var Element = require('./lib/element');
 var Attribute = require('./lib/attribute');
 var Text = require('./lib/text');
 
-function alterHtml(string) {
+module.exports = function renderHtml(input) {
 	return new Promise(function (resolve, reject) {
-		if (typeof string !== 'string') throw new Error('Argument must be a string.');
+		if (typeof input !== 'string') throw new TypeError('Input argument must be a string.');
 		
 		var DOM = new Dom;
 		var context = DOM;
 		
 		var parser = new htmlparser.Parser({
 			onopentag: function (name, attribs) {
-				var tag = new Tag(name);
+				var element = new Element(name);
 				for (var key in attribs) {
-					tag.addAttribute(new Attribute(key, attribs[key]));
+					element.appendAttribute(new Attribute(key, attribs[key]));
 				}
-				context.appendChild(tag);
-				context = tag;
+				context.appendChild(element);
+				context = element;
 			},
 			ontext: function (text) {
 				context.appendChild(new Text(text));
 			},
 			onclosetag: function (name) {
-				if (!context.parent) throw new Error('Current context was not assigned a parent.');
-				if (('' + name).toLowerCase() !== context.name.toLowerCase()) throw new Error('Reached a close tag that doesn\'t match the current context.');
+				if (!context.parent) throw new Error('Cannot exit a context which has no parent.');
+				if (('' + name).toLowerCase() !== context.name) throw new Error('Reached a close tag that doesn\'t match the current context.');
 				context = context.parent;
 			},
 			onerror: function (err) {
@@ -39,12 +39,42 @@ function alterHtml(string) {
 			}
 		}, {decodeEntities: false});
 		
-		parser.write(string);
+		parser.write(input);
 		parser.end();
 	});
 }
 
-module.exports = alterHtml;
-module.exports.Tag = Tag;
-module.exports.Attribute = Attribute;
-module.exports.Text = Text;
+[
+	{
+		property: 'element',
+		constructor: Element,
+		current: null,
+		original: Element.prototype.toString
+	},
+	{
+		property: 'attribute',
+		constructor: Attribute,
+		current: null,
+		original: Attribute.prototype.toString
+	},
+	{
+		property: 'text',
+		constructor: Text,
+		current: null,
+		original: Text.prototype.toString
+	}
+].forEach(function (node) {
+	Object.defineProperty(module.exports, node.property, {
+		get: function () {return node.current;},
+		set: function (func) {
+			if (typeof func !== 'function') throw new TypeError('Expected function, got ' + typeof func + '.');
+			node.current = func;
+			node.constructor.prototype.toString = function () {
+				return func.call(this, node.original);
+			};
+		}
+	});
+	module.exports[node.property] = function (original) {
+		return original.call(this);
+	};
+});
