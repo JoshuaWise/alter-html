@@ -1,5 +1,5 @@
 # render-html
-This library easily and intuitively allows developers to perform transforms on HTML element input, by specifying custom logic.
+This library easily and intuitively allows developers to perform transforms on HTML string input, by specifying custom logic.
 
 ## Usage
 ```javascript
