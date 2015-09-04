@@ -69,7 +69,8 @@ api.forEach(function (node) {
 			if (typeof func !== 'function') throw new TypeError('Expected function, got ' + typeof func + '.');
 			node.current = func;
 			node.constructor.prototype.toString = function () {
-				return func.call(this, node.original);
+				var str = func.call(this, node.original);
+				return typeof str === 'string' ? str : node.original.call(this);
 			};
 		}
 	});

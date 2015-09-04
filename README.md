@@ -34,9 +34,9 @@ render('<div class="foo"><span>hello world</span></div>')
 ```
 
 ```javascript
-render.attribute = function (toString) {
+render.attribute = function () {
 	if (this.name === this.value) return 'cat="power"';
-	else return toString.call(this);
+	// If you don't return a string, the default toString method is used anyway
 };
 
 render('<div class="foo" id="id" bar="baz"></div>')
@@ -65,7 +65,7 @@ render('<div></div><img><footer></footer> <b></b>')
 	});
 ```
 
-The first argument of these functions is the original `toString` method, which you can use to render the node in its default way. There are examples of this in the [usage](#Usage) section.
+The first argument of these functions is the original `toString` method, which you can use to render the node in its default way. There are examples of this in the [usage](#Usage) section. **HOWEVER**, if you don't return a string (i.e., if you return `undefined`), the original `toString` method is used anyway. So you can mostly ignore this argument, unless you plan on augmenting the default rendering (with regular expressions, for example).
 
 ## Element
 
