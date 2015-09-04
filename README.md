@@ -91,11 +91,13 @@ _**this.endTag**_ - a getter which returns the elements's rendered end tag (an e
 
 _**this.closeTag**_ - alias for `this.endTag`
 
-_**this.isVoid()**_ - a method which returns `true` or `false`, whether the element is a void element (such as `<img>` and `<br>`)
-
 _**this.getAttribute(name)**_ - a method which returns the string value of the specified attribute (`null`, if the attribute does not exist on the element)
 
 _**this.hasAttribute(name)**_ - a method which returns `true` or `false`, whether the element has the specified attribute
+
+_**this.isVoid()**_ - a method which returns `true` or `false`, whether the element is a void element (such as `<img>` and `<br>`)
+
+_**this.isElement**_ - a getter which returns `true` (note that is **not** a method)
 
 ## Attribute
 
@@ -105,13 +107,19 @@ _**this.value**_ - the value of the attribute, always a string
 
 _**this.owner**_ - a reference to the element which owns this attribute
 
+_**this.isAttribute**_ - a getter which returns `true`
+
 ## Text
 
 _**this.value**_ - the string of text that this node represents
 
 _**this.parent**_ - a reference to the parent `element` (or the `DOM root`)
 
+_**this.isText**_ - a getter which returns `true`
+
 ## DOM root
 
 When you use `this.parent` with top-level `elements` or `text` nodes, you'll get a reference to the DOM root, which has no properties other than `children`, which is an array, just like the `children` property of an `element`.
+
+_**this.isRoot**_ - a getter which returns `true`
 
